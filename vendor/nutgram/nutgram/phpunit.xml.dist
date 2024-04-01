@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache">
+    <testsuites>
+        <testsuite name="Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>./src</directory>
+        </include>
+        <exclude>
+            <directory>./examples</directory>
+            <directory>./tests</directory>
+            <directory>./src/Telegram/Properties</directory>
+            <directory>./src/Telegram/Endpoints</directory>
+            <directory>./src/Telegram/Types</directory>
+            <directory>./src/Testing/Constraints</directory>
+            <directory>./src/Telegram/Web</directory>
+            <file>./src/Support/StrUtils.php</file>
+            <file>./src/Support/Helpers.php</file>
+            <file>./src/Support/HandleLogging.php</file>
+            <file>./src/Telegram/Limits.php</file>
+            <file>./src/RunningMode/RunningMode.php</file>
+            <file>./src/Hydrator/Hydrator.php</file>
+        </exclude>
+    </source>
+    <php>
+        <env name="TELEGRAM_TOKEN" value="TELEGRAM_TOKEN_HERE" force="true"/>
+    </php>
+</phpunit>

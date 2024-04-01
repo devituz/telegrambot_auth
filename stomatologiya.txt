@@ -1,0 +1,48 @@
+				Stomatologiya
+admin:
+	bemor qoshish
+		ismi
+		familyasi
+		telefon raqami
+		tug'ulgan sanasi
+		yoshi
+		jinsi
+		manzili
+		rengen raqami
+		kasallig tarixi
+
+
+	bemor tahrirlash
+	         ismi
+		familyasi
+		telefon raqami
+		tug'ulgan sanasi
+		yoshi
+		jinsi
+		rengen raqami
+
+	barcha bemorlar
+		bemor qidirish (search)
+		bemor qoshish (button)
+		barcha bemorlar ro'yxati
+
+	tolov
+		tolov raqami
+		tolov sanasi
+		bemor
+		tolov summasi
+
+	barcha tolovlar
+		barcha tolov qilgan bemorlar
+		tolov qilgan sana
+		tolov qilgan summa
+
+	bemor profili
+		ismi
+		familiyasi
+		telefon raqami
+		manzili
+		kasallik tarixi
+			kasallik tarixi qoshish
+	 texts
+		color (gradientsiz)

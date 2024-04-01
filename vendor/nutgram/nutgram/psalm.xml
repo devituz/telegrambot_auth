@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="8"
+    resolveFromConfigFile="true"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <InvalidThrow>
+            <errorLevel type="suppress">
+                <referencedClass name="Psr\SimpleCache\InvalidArgumentException"/>
+            </errorLevel>
+        </InvalidThrow>
+        <UndefinedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="ReflectionType::getName"/>
+            </errorLevel>
+        </UndefinedMethod>
+        <PossiblyNullPropertyAssignmentValue>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+            </errorLevel>
+        </PossiblyNullPropertyAssignmentValue>
+        <UndefinedInterfaceMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Psr\Http\Client\ClientInterface::get"/>
+                <referencedMethod name="Psr\Http\Client\ClientInterface::post"/>
+            </errorLevel>
+        </UndefinedInterfaceMethod>
+        <InvalidScope>
+            <errorLevel type="suppress">
+                <directory name="tests/"/>
+            </errorLevel>
+        </InvalidScope>
+    </issueHandlers>
+</psalm>
