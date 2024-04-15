@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('history');
             $table->foreignId('patient_id')->constrained()->cascadeOnDelete();
+
         });
     }
 
