@@ -42,6 +42,7 @@ use SergiX44\Nutgram\Telegram\Types\Passport\PassportData;
 use SergiX44\Nutgram\Telegram\Types\Payment\Invoice;
 use SergiX44\Nutgram\Telegram\Types\Payment\SuccessfulPayment;
 use SergiX44\Nutgram\Telegram\Types\Poll\Poll;
+use SergiX44\Nutgram\Telegram\Types\Reaction\ReactionType;
 use SergiX44\Nutgram\Telegram\Types\Shared\ChatShared;
 use SergiX44\Nutgram\Telegram\Types\Shared\UserShared;
 use SergiX44\Nutgram\Telegram\Types\Shared\UsersShared;
@@ -90,8 +91,20 @@ class Message extends BaseType
      */
     public ?int $sender_boost_count = null;
 
+    /**
+     * Optional. The bot that actually sent the message on behalf of the business account.
+     * Available only for outgoing messages sent on behalf of the connected business account.
+     */
+    public ?User $sender_business_bot = null;
+
     /** Date the message was sent in Unix time */
     public int $date;
+
+    /**
+     * Optional. Unique identifier of the business connection from which the message was received.
+     * If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
+     */
+    public ?string $business_connection_id = null;
 
     /** Conversation the message belongs to */
     public Chat $chat;
@@ -196,6 +209,12 @@ class Message extends BaseType
      * True, if the message can't be forwarded
      */
     public ?bool $has_protected_content = null;
+
+    /**
+     * Optional.
+     * True, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message
+     */
+    public ?bool $is_from_offline = null;
 
     /**
      * Optional.
@@ -843,5 +862,29 @@ class Message extends BaseType
     public function isInaccessible(): bool
     {
         return $this->date === 0;
+    }
+
+    /**
+     * Use this method to change the chosen reactions on a message.
+     * Service messages can't be reacted to.
+     * Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel.
+     * Returns True on success.
+     * @see https://core.telegram.org/bots/api#setmessagereaction
+     * @param ReactionType|ReactionType[]|null $reaction Optional. New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+     * @param bool $is_big Optional. Pass True to set the reaction with a big animation
+     * @return bool|null
+     */
+    public function react(ReactionType|array|null $reaction = null, bool $is_big = false): ?bool
+    {
+        if ($reaction instanceof ReactionType) {
+            $reaction = [$reaction];
+        }
+
+        return $this->getBot()->setMessageReaction(
+            reaction: $reaction,
+            is_big: $is_big,
+            chat_id: $this->chat->id,
+            message_id: $this->message_id
+        );
     }
 }
